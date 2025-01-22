@@ -1,0 +1,26 @@
+{
+    "firstName": "Joe",
+    "lastName": "Jackson",
+    "gender": "male",
+    "age": 28,
+    "tempAddress": {
+        "streetAddress": "101",
+        "city": "San Diego",
+        "country": "CA"
+    },
+    "permAddress": {
+        "streetAddress": "102",
+        "city": "New York",
+        "country": "USA"
+    },
+    "phoneNumbers": [
+        {
+            "type": "home",
+            "number": "123456789"
+        },
+        {
+            "type": "office",
+            "number": "987654321"
+        }
+    ]
+}
