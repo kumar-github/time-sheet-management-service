@@ -1,0 +1,80 @@
+
+https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html
+https://java-8-tips.readthedocs.io/en/stable/streamsapi.html
+
+
+foreach with consumer on list
+
+
+
+Map<String, Item> itemNameToItemInstance = items.stream()
+        .collect(Collectors.toMap(Item::getName, Function.identity(),
+                (oldItem, newItem) -> new Item(oldItem.getName(),
+                        oldItem.getQuantity() + newItem.getQuantity())));
+
+Map<String, List<Student>> nameToStudentsInstance = students.stream()
+        .collect(Collectors.toMap(Student::getName, student -> new ArrayList<>(Collections.singletonList(student)),
+                (oldList, newList) -> {
+                    oldList.addAll(newList);
+                    return oldList;
+                }));                        
+
+
+
+change the isGreaterThan3 function to Function
+change isGreaterThan3 Function to predicate
+
+what if i want isGreaterThan 4 or 5 later, i dont want to duplicate the predicates
+
+Function<Integer, Predicate<Integer>> isGreaterThan = pivot -> number -> number > pivot;
+
+
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        final long    start       = System.nanoTime();
+        System.out.println(numbers.stream()
+                                  .filter(e -> e % 2 == 0)
+                                  .mapToInt(e -> e * 2)
+                                  .sum());
+        final long    end       = System.nanoTime();
+        long elapsed = end - start;
+        System.out.println(elapsed);
+        System.out.println((double) elapsed / 1_000_000_000);
+        System.out.println(TimeUnit.SECONDS.convert(elapsed, TimeUnit.NANOSECONDS));
+
+
+
+https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html
+https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html
+https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ForkJoinPool.html
+
+
+Thread Scheduler
+
+
+Theory
+3 ways
+new Thread()
+    dont call run method, scheduler will check everuthing do needful
+extends
+implements
+
+
+before creating your own thread try an existing thread.
+    work of this thread is to run the main method
+
+
+    main method started
+    ended
+
+    10 / 0
+    change name and check
+
+    print thread object and see. to string methofd
+
+
+    call start and put breakpoint in the statr method of Thread class   
+
+
+calling t2.join() from t1 will make t1 wait on t2 object (t2 is a Thread, which is a subclass of Object). The wait will be forever as long as t1 is alive. When t2 thread finishes its work, it will call Object.notifyAll() so t1 awakens.    
+

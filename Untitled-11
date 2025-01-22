@@ -1,0 +1,117 @@
+
+
+just @enableautoconfig on main class
+
+just run and hit /hello -- 404 bcoz we did not configure any req mapping for this endpoint
+
+
+then add hellocontroller @restcontroller
+
+
+then run
+still wont work bcoz spring does  not know about our controller
+
+
+let spring know by compscan
+
+
+y adding compsacn solve the problem but how it says srping to configure the controller
+
+
+
+it scans the packages and some packages of the compscan for component candidates and create bean instances.
+
+
+
+class HelloUtils -- wont do anything
+
+@service
+class HelloService -- create bean
+
+@restcontroller
+class HelloController -- bean
+
+class MyOtherUtils
+
+
+
+
+change method in the controller class to use the serivce provider to return msg.
+private final HMP hMP;
+
+cons injecttion
+
+// not service
+class HMP {
+    public String getMEssage() {
+        return "Hello World";
+    }
+}
+
+instead of saying it as component or service lets take another approach.
+
+
+// no config at first add later
+class HelloConfig {
+
+    @Bean
+    public HMP hMP() {
+        return new HMP;
+    }
+
+}
+
+
+add @Config
+
+
+it works because it is also component. it picked up by compscan
+
+PersonController
+MovieController
+
+
+
+inside HelloConfiguration
+
+@bean
+HMP hmp(HNP hnp) {
+    return new HMP(hnp);
+}
+
+@bean
+static HelloPostProcessor helloPostProcessor() {
+    return new HelloPostProcessor
+}
+
+static class HelloPostProcessor BDRPP {
+    @overide
+    void ppBDR() {
+        RBD bd = new RBD(HNP.class);
+        bd.setins(HNP::new);
+        registry.rbd("nameProvider", bd);
+    }
+
+
+    }
+}
+
+class HMP {
+
+    private final HNP hnp;
+
+    cons injection    
+    
+    
+    public String getMEssage() {
+        return "Hello" + this.nameProvider.getName();
+    }
+}
+
+class HNP {
+
+    getName() {
+        return "Spring Boot";
+    }
+
+}
